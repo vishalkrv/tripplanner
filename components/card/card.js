@@ -1,4 +1,4 @@
-import { Box, Image, Badge, Icon } from "@chakra-ui/react";
+import { Box, Image, Icon } from "@chakra-ui/react";
 import { AiFillStar } from "react-icons/ai";
 
 export default function Card(props) {

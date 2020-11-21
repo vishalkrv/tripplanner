@@ -101,7 +101,7 @@ export default function Home() {
   };
 
   return (
-    <Layout>
+    <Layout isLogin={false}>
       <ReactFullpage
         navigation={false}
         onLeave={onLeave}
