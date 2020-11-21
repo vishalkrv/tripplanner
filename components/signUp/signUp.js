@@ -72,7 +72,12 @@ export default function SignUp(props) {
               <Box p="4">
                 <Text>
                   Already have an account?{" "}
-                  <Button color="pink.500" pb="1" variant="link"  onClick={() => props.setType("Login")}>
+                  <Button
+                    color="pink.500"
+                    pb="1"
+                    variant="link"
+                    onClick={() => props.setType("Login")}
+                  >
                     Login
                   </Button>
                 </Text>
@@ -88,12 +93,7 @@ export default function SignUp(props) {
                       isInvalid={form.errors.username && form.touched.username}
                     >
                       <FormLabel htmlFor="username">Username</FormLabel>
-                      <Input
-                        {...field}
-                        ref={initialRef}
-                        id="username"
-                        placeholder="Username"
-                      />
+                      <Input {...field} ref={initialRef} id="username" />
                       <FormErrorMessage>
                         {form.errors.username}
                       </FormErrorMessage>
@@ -106,12 +106,7 @@ export default function SignUp(props) {
                       isInvalid={form.errors.email && form.touched.email}
                     >
                       <FormLabel htmlFor="email">Email</FormLabel>
-                      <Input
-                        {...field}
-                        ref={initialRef}
-                        id="email"
-                        placeholder="Email"
-                      />
+                      <Input {...field} ref={initialRef} id="email" />
                       <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                     </FormControl>
                   )}
@@ -126,12 +121,7 @@ export default function SignUp(props) {
                         }
                       >
                         <FormLabel htmlFor="firstName">First name</FormLabel>
-                        <Input
-                          {...field}
-                          ref={initialRef}
-                          id="firstName"
-                          placeholder="First"
-                        />
+                        <Input {...field} ref={initialRef} id="firstName" />
                         <FormErrorMessage>
                           {form.errors.firstName}
                         </FormErrorMessage>
@@ -144,14 +134,10 @@ export default function SignUp(props) {
                         isInvalid={
                           form.errors.lastName && form.touched.lastName
                         }
+                        pl="4"
                       >
                         <FormLabel htmlFor="lastName">Last name</FormLabel>
-                        <Input
-                          {...field}
-                          ref={initialRef}
-                          id="lastName"
-                          placeholder="Last name"
-                        />
+                        <Input {...field} ref={initialRef} id="lastName" />
                         <FormErrorMessage>
                           {form.errors.lastName}
                         </FormErrorMessage>
@@ -165,12 +151,7 @@ export default function SignUp(props) {
                       isInvalid={form.errors.address && form.touched.address}
                     >
                       <FormLabel htmlFor="address">Address</FormLabel>
-                      <Input
-                        {...field}
-                        ref={initialRef}
-                        id="address"
-                        placeholder="Address"
-                      />
+                      <Input {...field} ref={initialRef} id="address" />
                       <FormErrorMessage>{form.errors.address}</FormErrorMessage>
                     </FormControl>
                   )}
@@ -182,12 +163,7 @@ export default function SignUp(props) {
                         isInvalid={form.errors.city && form.touched.city}
                       >
                         <FormLabel htmlFor="city">City</FormLabel>
-                        <Input
-                          {...field}
-                          ref={initialRef}
-                          id="city"
-                          placeholder="City"
-                        />
+                        <Input {...field} ref={initialRef} id="city" />
                         <FormErrorMessage>{form.errors.city}</FormErrorMessage>
                       </FormControl>
                     )}
@@ -195,15 +171,11 @@ export default function SignUp(props) {
                   <Field name="state">
                     {({ field, form }) => (
                       <FormControl
+                        pl="4"
                         isInvalid={form.errors.state && form.touched.state}
                       >
                         <FormLabel htmlFor="state">State</FormLabel>
-                        <Input
-                          {...field}
-                          ref={initialRef}
-                          id="state"
-                          placeholder="State"
-                        />
+                        <Input {...field} ref={initialRef} id="state" />
                         <FormErrorMessage>{form.errors.state}</FormErrorMessage>
                       </FormControl>
                     )}
@@ -215,12 +187,7 @@ export default function SignUp(props) {
                       isInvalid={form.errors.zip && form.touched.zip}
                     >
                       <FormLabel htmlFor="zip">Zip</FormLabel>
-                      <Input
-                        {...field}
-                        ref={initialRef}
-                        id="zip"
-                        placeholder="Zip"
-                      />
+                      <Input {...field} ref={initialRef} id="zip" />
                       <FormErrorMessage>{form.errors.zip}</FormErrorMessage>
                     </FormControl>
                   )}
@@ -231,12 +198,7 @@ export default function SignUp(props) {
                       isInvalid={form.errors.phone && form.touched.phone}
                     >
                       <FormLabel htmlFor="phone">Phone</FormLabel>
-                      <Input
-                        {...field}
-                        ref={initialRef}
-                        id="phone"
-                        placeholder="Phone"
-                      />
+                      <Input {...field} ref={initialRef} id="phone" />
                       <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
                     </FormControl>
                   )}

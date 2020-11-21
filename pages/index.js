@@ -8,7 +8,7 @@ import { TiArrowRightThick } from "react-icons/ti";
 const originalColors = ["white", "#6B46C1", "yellow"];
 
 export default function Home() {
-  const [progress, setProgress] = useState(0);
+  const [section, setSection] = useState(0);
   const [page, setPage] = useState({
     sectionsColor: [...originalColors],
     fullpages: [
@@ -36,7 +36,8 @@ export default function Home() {
                 rating: 5,
               },
             ],
-          },{
+          },
+          {
             image: "china",
             title: "China",
             description:
@@ -95,7 +96,7 @@ export default function Home() {
 
   const afterLoad = (origin, destination, direction) => {
     if (destination.index == 1) {
-      console.log('I m in second section')
+      setSection(1);
     }
   };
 
@@ -151,7 +152,9 @@ export default function Home() {
                                 {t.description}
                               </Text>
                               <Button
-                                rightIcon={<TiArrowRightThick></TiArrowRightThick>}
+                                rightIcon={
+                                  <TiArrowRightThick></TiArrowRightThick>
+                                }
                                 colorScheme="pink"
                                 variant="solid"
                                 size="lg"
@@ -181,13 +184,25 @@ export default function Home() {
                     ))}
                 </div>
               ))}
-              {/* <div className="section">
+              <div className="section">
                 <Flex justifyContent="space-between" padding="0 20%">
-                  <ProgressRing radius={180} stroke={8} progress={100} count={1290} content="Total Trips"/>
-                  <ProgressRing radius={180} stroke={8} progress={100} count={1234} content="Total Advisors"/>
-                  <ProgressRing radius={180} stroke={8} progress={100} count={1000} content="Total Savings"/>
+                  <ProgressRing
+                    trigger={section === 1 ? true : false}
+                    count={1290}
+                    content="Total Trips"
+                  />
+                  <ProgressRing
+                    trigger={section === 1 ? true : false}
+                    count={1234}
+                    content="Total Advisors"
+                  />
+                  <ProgressRing
+                    trigger={section === 1 ? true : false}
+                    count={1000}
+                    content="Total Savings"
+                  />
                 </Flex>
-              </div> */}
+              </div>
             </ReactFullpage.Wrapper>
           )
         }
