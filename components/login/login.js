@@ -1,7 +1,4 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
   ModalHeader,
   ModalFooter,
   ModalBody,
@@ -11,13 +8,18 @@ import {
   FormLabel,
   FormErrorMessage,
   Input,
+  Flex,
+  Spacer,
+  Box,
+  Text,
+  Link,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { useRef, useState } from "react";
 import { useDisclosure } from "@chakra-ui/hooks";
 
-export default function LoginBtn() {
+export default function Login(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef();
 
@@ -50,83 +52,82 @@ export default function LoginBtn() {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="pink" variant="outline" size="md">
-        Login
-      </Button>
-      <Modal
-        initialFocusRef={initialRef}
-        isOpen={isOpen}
-        onClose={onClose}
-        isCentered
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <Formik
-            initialValues={data}
-            onSubmit={onSave}
-            validationSchema={schema}
-          >
-            {(props) => (
-              <>
-                <Form>
-                  <ModalHeader>Login</ModalHeader>
-                  <ModalCloseButton></ModalCloseButton>
-                  <ModalBody pb={6}>
-                    <Field name="email">
-                      {({ field, form }) => (
-                        <FormControl
-                          isInvalid={form.errors.email && form.touched.email}
-                        >
-                          <FormLabel htmlFor="email">Email</FormLabel>
-                          <Input
-                            {...field}
-                            ref={initialRef}
-                            id="email"
-                            placeholder="Email"
-                          />
-                          <FormErrorMessage>
-                            {form.errors.email}
-                          </FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
-                    <Field name="password">
-                      {({ field, form }) => (
-                        <FormControl
-                          isInvalid={
-                            form.errors.password && form.touched.password
-                          }
-                        >
-                          <FormLabel htmlFor="password">Password</FormLabel>
-                          <Input
-                            {...field}
-                            id="password"
-                            type="password"
-                            placeholder="Password"
-                          />
-                          <FormErrorMessage>
-                            {form.errors.password}
-                          </FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      colorScheme="pink"
-                      mr={3}
-                      type="submit"
-                      isLoading={props.isSubmitting}
-                    >
-                      Login
-                    </Button>
-                  </ModalFooter>
-                </Form>
-              </>
-            )}
-          </Formik>
-        </ModalContent>
-      </Modal>
+      <Formik initialValues={data} onSubmit={onSave} validationSchema={schema}>
+        {(actions) => (
+          <Flex>
+            <Flex direction="column" w="530px" bg="yellow.200">
+              <Spacer></Spacer>
+              <Box p="4">
+                <Text>
+                  Don't have an account?{" "}
+                  <Button
+                    color="pink.500"
+                    pb="1"
+                    onClick={() => props.setType("Register")}
+                    variant="link"
+                  >
+                    Register
+                  </Button>
+                </Text>
+              </Box>
+            </Flex>
+            <Flex>
+              <Form>
+                <ModalHeader>Login</ModalHeader>
+                <ModalCloseButton></ModalCloseButton>
+                <ModalBody pb={6}>
+                  <Field name="email">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.email && form.touched.email}
+                      >
+                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <Input
+                          {...field}
+                          ref={initialRef}
+                          id="email"
+                          placeholder="Email"
+                        />
+                        <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="password">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={
+                          form.errors.password && form.touched.password
+                        }
+                      >
+                        <FormLabel htmlFor="password">Password</FormLabel>
+                        <Input
+                          {...field}
+                          id="password"
+                          type="password"
+                          placeholder="Password"
+                        />
+                        <FormErrorMessage>
+                          {form.errors.password}
+                        </FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    colorScheme="pink"
+                    mr={3}
+                    type="submit"
+                    isLoading={actions.isSubmitting}
+                  >
+                    Login
+                  </Button>
+                </ModalFooter>
+              </Form>
+            </Flex>
+          </Flex>
+        )}
+      </Formik>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Flex, Button, Text } from "@chakra-ui/react";
+import LoginToggle from '../loginToggle/loginToggle';
 import styles from "./header.module.css";
-import LoginBtn from '../login/login';
 
 export default function Header() {
   return (
@@ -31,7 +31,7 @@ export default function Header() {
               <Text fontSize="lg">Plans</Text>
             </a>
           </Link>          
-          <LoginBtn></LoginBtn>
+          <LoginToggle type="Login"></LoginToggle>
         </Flex>
       </Flex>
     </header>
