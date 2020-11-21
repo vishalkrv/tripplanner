@@ -1,27 +1,23 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useCountUp } from "react-countup";
+import { Text } from "@chakra-ui/react";
+import styles from "./progressRing.module.css";
 
-export default function ProgressRing({ radius, stroke, progress, count, content }) {
-  const [attr, setAttr] = useState({
-    normalizedRadius: radius - stroke * 2,
-    circumference: (radius - stroke * 2) * 2 * Math.PI,
+export default function ProgressRing({ trigger, count, content }) {
+  const { countUp, start } = useCountUp({
+    end: count,
+    delay: 1000,
+    duration: 5,
   });
-  const strokeDashoffset =
-    attr.circumference - (progress / 100) * attr.circumference;
-  return (    
-    <svg height={radius * 2} width={radius * 2}>
-      <circle
-        stroke="white"
-        fill="transparent"
-        strokeWidth={stroke}
-        strokeDasharray={attr.circumference + " " + attr.circumference}
-        style={{ strokeDashoffset }}
-        r={attr.normalizedRadius}
-        cx={radius}
-        cy={radius}
-      />
-      <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="100" fontFamily="fantasy">{count}</text>
-      <text x="50%" y="70%" textAnchor="middle" dy=".3em" fontSize="35" fontWeight="500">{content}</text>
-    </svg>    
-    
+  useEffect(() => {
+    if (trigger) {
+      start();
+    }
+  }, [trigger]);
+  return (
+    <div className={styles.cirlce}>
+      <div className={styles.counter}>{countUp}</div>
+      <Text fontSize="4xl">{content}</Text>
+    </div>
   );
 }

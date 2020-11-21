@@ -1,0 +1,17 @@
+.cirlce {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  font-size: 50px;
+  color: #000;
+  text-align: center;
+  background: transparent;
+  border-color: #fff;
+  border-width: 10px;
+  padding-top: 65px;
+  border-style: solid;
+}
+
+.counter{
+    font-size: 100px;
+}

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Flex, Button, Text } from "@chakra-ui/core";
+import { Flex, Button, Text } from "@chakra-ui/react";
+import LoginToggle from '../loginToggle/loginToggle';
 import styles from "./header.module.css";
 
 export default function Header() {
@@ -11,7 +12,7 @@ export default function Header() {
         className={styles.navbar}
       >
         <Link href="/">
-          <a style={{ height: "100%" }}>
+          <a style={{ height: "100%" }}> 
             <Flex className={styles.appLogo}></Flex>
           </a>
         </Link>
@@ -27,12 +28,10 @@ export default function Header() {
           </Link>
           <Link href="/">
             <a>
-              <Text fontSize="lg">Destinations</Text>
+              <Text fontSize="lg">Plans</Text>
             </a>
-          </Link>
-          <Button variantColor="pink" variant="outline" size="md">
-            Login
-          </Button>
+          </Link>          
+          <LoginToggle type="Login"></LoginToggle>
         </Flex>
       </Flex>
     </header>

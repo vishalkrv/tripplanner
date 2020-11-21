@@ -1,14 +1,14 @@
 import { React, useState, useEffect } from "react";
 import { Layout, Card, ProgressRing } from "../components";
 import ReactFullpage from "@fullpage/react-fullpage";
-import { Flex, Button, Text, Box } from "@chakra-ui/core";
+import { Flex, Button, Text, Box } from "@chakra-ui/react";
 import styles from "../styles/Home.module.css";
 import { TiArrowRightThick } from "react-icons/ti";
 
 const originalColors = ["white", "#6B46C1", "yellow"];
 
 export default function Home() {
-  const [progress, setProgress] = useState(0);
+  const [section, setSection] = useState(0);
   const [page, setPage] = useState({
     sectionsColor: [...originalColors],
     fullpages: [
@@ -36,7 +36,8 @@ export default function Home() {
                 rating: 5,
               },
             ],
-          },{
+          },
+          {
             image: "china",
             title: "China",
             description:
@@ -95,8 +96,7 @@ export default function Home() {
 
   const afterLoad = (origin, destination, direction) => {
     if (destination.index == 1) {
-      // document.querySelector("#section2").querySelector("img").style.left =
-      //   0 + "px";
+      setSection(1);
     }
   };
 
@@ -140,12 +140,7 @@ export default function Home() {
                                 fontSize="7.5rem"
                                 textTransform="uppercase"
                                 fontFamily="fantasy"
-                                // fontWeight="700"
                                 lineHeight="1"
-                                style={{
-                                  "-webkit-text-stroke-width": 0.5,
-                                  "-webkit-text-stroke-color": "black",
-                                }}
                               >
                                 {t.title}
                               </Text>
@@ -153,16 +148,14 @@ export default function Home() {
                                 color="white"
                                 fontSize="3xl"
                                 paddingLeft="0.5rem"
-                                style={{
-                                  "-webkit-text-stroke-width": 0.3,
-                                  "-webkit-text-stroke-color": "black",
-                                }}
                               >
                                 {t.description}
                               </Text>
                               <Button
-                                rightIcon={TiArrowRightThick}
-                                variantColor="pink"
+                                rightIcon={
+                                  <TiArrowRightThick></TiArrowRightThick>
+                                }
+                                colorScheme="pink"
                                 variant="solid"
                                 size="lg"
                                 marginTop="10px"
@@ -193,9 +186,21 @@ export default function Home() {
               ))}
               <div className="section">
                 <Flex justifyContent="space-between" padding="0 20%">
-                  <ProgressRing radius={180} stroke={8} progress={100} count={1290} content="Total Trips"/>
-                  <ProgressRing radius={180} stroke={8} progress={100} count={1234} content="Total Advisors"/>
-                  <ProgressRing radius={180} stroke={8} progress={100} count={1000} content="Total Savings"/>
+                  <ProgressRing
+                    trigger={section === 1 ? true : false}
+                    count={1290}
+                    content="Total Trips"
+                  />
+                  <ProgressRing
+                    trigger={section === 1 ? true : false}
+                    count={1234}
+                    content="Total Advisors"
+                  />
+                  <ProgressRing
+                    trigger={section === 1 ? true : false}
+                    count={1000}
+                    content="Total Savings"
+                  />
                 </Flex>
               </div>
             </ReactFullpage.Wrapper>
