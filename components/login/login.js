@@ -54,8 +54,8 @@ export default function Login(props) {
     <>
       <Formik initialValues={data} onSubmit={onSave} validationSchema={schema}>
         {(actions) => (
-          <Flex>
-            <Flex direction="column" w="530px" bg="yellow.200">
+          <Flex h="550px">
+            <Flex direction="column" bg="yellow.200" flexBasis="0" flexGrow="1">
               <Spacer></Spacer>
               <Box p="4">
                 <Text>
@@ -71,8 +71,8 @@ export default function Login(props) {
                 </Text>
               </Box>
             </Flex>
-            <Flex>
-              <Form>
+            <Flex flexBasis="0" flexGrow="1">
+              <Form style={{width:"100%", paddingRight:"10px"}}>
                 <ModalHeader>Login</ModalHeader>
                 <ModalCloseButton></ModalCloseButton>
                 <ModalBody pb={6}>
