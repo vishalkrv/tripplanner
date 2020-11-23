@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Flex, Button, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import LoginToggle from '../loginToggle/loginToggle';
 import styles from "./header.module.css";
 

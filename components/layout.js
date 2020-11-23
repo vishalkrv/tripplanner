@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Header from "./header/header";
+import HeaderSolid from "./headerSolid/headerSolid";
 
 export default function Layout({
   children,
   title = "Trip Planner - Some description",
+  isLogin,
 }) {
   return (
     <>
@@ -12,9 +14,8 @@ export default function Layout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header></Header>
+      {isLogin ? <HeaderSolid /> : <Header></Header>}
       <main>{children}</main>
-      {/* <footer>{"I`m here to stay"}</footer> */}
     </>
   );
 }
