@@ -23,19 +23,19 @@ export default function Home() {
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "bali_1.jpg",
-                rating: 4,
+                rating: 4
               },
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "bali_2.jpg",
-                rating: 3,
+                rating: 3
               },
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "bali_3.jpg",
-                rating: 5,
-              },
-            ],
+                rating: 5
+              }
+            ]
           },
           {
             image: "china",
@@ -46,19 +46,19 @@ export default function Home() {
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "vegas_3.jpg",
-                rating: 4,
+                rating: 4
               },
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "vegas_1.jpg",
-                rating: 4,
+                rating: 4
               },
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "vegas_2.jpg",
-                rating: 4,
-              },
-            ],
+                rating: 4
+              }
+            ]
           },
           {
             image: "thailand",
@@ -69,23 +69,23 @@ export default function Home() {
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "bali_3.jpg",
-                rating: 4,
+                rating: 4
               },
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "bali_1.jpg",
-                rating: 4,
+                rating: 4
               },
               {
                 title: "Pura Ulun Danu Bratan",
                 image: "vegas_3.jpg",
-                rating: 4,
-              },
-            ],
-          },
-        ],
-      },
-    ],
+                rating: 4
+              }
+            ]
+          }
+        ]
+      }
+    ]
   });
 
   const onLeave = (origin, destination, direction) => {
@@ -112,7 +112,7 @@ export default function Home() {
         loopHorizontal={true}
         afterLoad={afterLoad}
         render={(comp) =>
-          console.log("render prop change") || (
+          console.log("render prop changes") || (
             <ReactFullpage.Wrapper>
               {page.fullpages.map((item) => (
                 <div key={item.text} className="section">
@@ -125,7 +125,7 @@ export default function Home() {
                             backgroundImage: `url(assets/${t.image}.jpg)`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
-                            backgroundRepeat: "no-repeat",
+                            backgroundRepeat: "no-repeat"
                           }}
                         >
                           <div className={styles.homePage}>
