@@ -1,5 +1,7 @@
 import { React, useState, useEffect } from "react";
-import { Layout, Card, ProgressRing } from "../components";
+import Layout from "../components/layout";
+import Card from "../components/card/card";
+import ProgressRing from "../components/progressRing/progressRing";
 import ReactFullpage from "@fullpage/react-fullpage";
 import { Flex, Button, Text, Box } from "@chakra-ui/react";
 import styles from "../styles/Home.module.css";
