@@ -1,35 +1,18 @@
-import { Box, Image, Icon } from "@chakra-ui/react";
-import { AiFillStar } from "react-icons/ai";
+import { Box, Image, Flex, Text, Badge } from "@chakra-ui/react";
 
 export default function Card(props) {
   const { title, image, rating, width } = props.option;
   return (
-    <Box maxW="sm" overflow="hidden" width={width} cursor="pointer">
-      <Box padding="0 0 1.5rem 0">
-        <Box
-          mt="1"
-          fontFamily="Merriweather"
-          as="h4"
-          lineHeight="tight"
-          isTruncated
-        >
+    <Box maxW="320px" boxShadow="lg" p="1" rounded="md" bg="white" position="relative" h="100%" mr="10px">
+      <Box position="absolute" bottom="3px">
+        <Flex align="baseline" mt={2}>
+          <Badge colorScheme="pink">Trending</Badge>
+        </Flex>
+        <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short" bg="white">
           {title}
-        </Box>
-
-        <Box d="flex" mt="2" alignItems="center">
-          {Array(5)
-            .fill("")
-            .map((_, i) => (
-              <Icon
-                as={AiFillStar}
-                boxSize="20px"
-                key={i}
-                color={i < rating ? "yellow.300" : "gray.300"}
-              />
-            ))}
-        </Box>
+        </Text>
       </Box>
-      <Image rounded="lg" src={`/assets/${image}`} height="350px" />
+      <Image borderRadius="md" src={`/assets/${image}`} h="310px" w="250px" />
     </Box>
   );
 }

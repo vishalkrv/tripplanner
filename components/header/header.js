@@ -1,26 +1,32 @@
 import Link from "next/link";
-import { Flex, Text } from "@chakra-ui/react";
-import LoginToggle from '../loginToggle/loginToggle';
-import styles from "./header.module.css";
+import { Flex, Text, Box } from "@chakra-ui/react";
+import LoginToggle from "../loginToggle/loginToggle";
 
 export default function Header() {
   return (
-    <header className={styles.header}>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        className={styles.navbar}
-      >
+    <Box
+      as="header"
+      position="fixed"
+      w="100%"
+      color="white"
+      h="70px"
+      zIndex="9"
+      padding="0px 30px"
+    >
+      <Flex alignItems="center" justifyContent="space-between" h="100%">
         <Link href="/">
-          <a style={{ height: "100%" }}> 
-            <Flex className={styles.appLogo}></Flex>
-          </a>
+          <Box as="a" h="100%">
+            <Flex
+              backgroundPosition="center"
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              w="200px"
+              h="100%"
+              backgroundImage={`url("/assets/logo5.png")`}
+            ></Flex>
+          </Box>
         </Link>
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
-          style={{ width: "350px" }}
-        >
+        <Flex alignItems="center" justifyContent="space-between" w="350px">
           <Link href="/">
             <a>
               <Text fontSize="lg">Home</Text>
@@ -30,10 +36,10 @@ export default function Header() {
             <a>
               <Text fontSize="lg">Plans</Text>
             </a>
-          </Link>          
+          </Link>
           <LoginToggle type="Login"></LoginToggle>
         </Flex>
       </Flex>
-    </header>
+    </Box>
   );
 }

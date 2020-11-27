@@ -5,7 +5,7 @@ const customTheme = {
  styles: {
     global: (props) => ({
       body: {        
-        fontFamily: "Lato, sans-serif"
+        fontFamily: "Oxygen, sans-serif"
       },
     }),
   }
