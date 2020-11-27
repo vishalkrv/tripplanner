@@ -1,5 +1,5 @@
 {
-  "name": "tripplanner",
+  "name": "my-trip-planner",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -24,5 +24,7 @@
   "devDependencies": {
     "eslint": "^7.12.1",
     "eslint-plugin-react": "^7.21.5"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }
