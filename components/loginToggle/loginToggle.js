@@ -17,7 +17,7 @@ export default function LoginToggle(props) {
   }, []);
   return (
     <>
-      <Button onClick={onOpen} colorScheme="pink" variant="outline" size="md">
+      <Button onClick={onOpen} colorScheme="pink" variant="solid" size="md">
         Login
       </Button>
       <Modal size={"5xl"} isOpen={isOpen} onClose={onClose} isCentered>

@@ -8,7 +8,7 @@ export default function Card(props) {
       <Box padding="0 0 1.5rem 0">
         <Box
           mt="1"
-          fontWeight="semibold"
+          fontFamily="Merriweather"
           as="h4"
           lineHeight="tight"
           isTruncated

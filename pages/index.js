@@ -141,7 +141,8 @@ export default function Home() {
                                 color="white"
                                 fontSize="7.5rem"
                                 textTransform="uppercase"
-                                fontFamily="fantasy"
+                                fontWeight="700"
+                                fontFamily="Kalam, cursive"
                                 lineHeight="1"
                               >
                                 {t.title}
@@ -149,6 +150,8 @@ export default function Home() {
                               <Text
                                 color="white"
                                 fontSize="3xl"
+                                fontWeight="300"
+                                fontFamily="Kalam, cursive"
                                 paddingLeft="0.5rem"
                               >
                                 {t.description}
@@ -158,7 +161,7 @@ export default function Home() {
                                   <TiArrowRightThick></TiArrowRightThick>
                                 }
                                 colorScheme="pink"
-                                variant="solid"
+                                variant="outline"
                                 size="lg"
                                 marginTop="10px"
                                 marginLeft="10px"
@@ -166,7 +169,7 @@ export default function Home() {
                                 Explore
                               </Button>
                             </Flex>
-                            <Flex
+                            {/* <Flex
                               height="450px"
                               marginTop="-250px"
                               justifyContent="space-between"
@@ -179,7 +182,7 @@ export default function Home() {
                                   option={{ width: "15rem", ...item }}
                                 ></Card>
                               ))}
-                            </Flex>
+                            </Flex> */}
                           </div>
                         </div>
                       </div>
