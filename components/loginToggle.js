@@ -6,8 +6,8 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/hooks";
-import Login from "../login/login";
-import SignUp from "../signUp/signUp";
+import Login from "./login";
+import SignUp from "./signUp";
 
 export default function LoginToggle(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -17,7 +17,7 @@ export default function LoginToggle(props) {
   }, []);
   return (
     <>
-      <Button onClick={onOpen} colorScheme="pink" variant="outline" size="md">
+      <Button onClick={onOpen} colorScheme="pink" variant="solid" size="md">
         Login
       </Button>
       <Modal size={"5xl"} isOpen={isOpen} onClose={onClose} isCentered>

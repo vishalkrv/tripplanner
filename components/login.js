@@ -12,16 +12,19 @@ import {
   Spacer,
   Box,
   Text,
-  Link,
+  useToast 
 } from "@chakra-ui/react";
 import * as Yup from "yup";
+import { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import { useRef, useState } from "react";
 import { useDisclosure } from "@chakra-ui/hooks";
 
 export default function Login(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast()
   const initialRef = useRef();
+  const router = useRouter();
 
   //Set initial values top empty for email and password
   const [data, setData] = useState({
@@ -45,8 +48,18 @@ export default function Login(props) {
    */
   const onSave = (values, actions) => {
     setTimeout(() => {
-      console.log(values);
-      actions.setSubmitting(false);
+      if (values.email === "demo@mail.com" && values.password === "demo") {
+        actions.setSubmitting(false);
+        router.push("/dashboard");
+      } else {
+        toast({
+          description: "Invalid username/password",
+          status: "warning",
+          duration: 9000,
+          isClosable: true,
+        })
+        actions.setSubmitting(false);
+      }
     }, 1000);
   };
 
@@ -72,7 +85,7 @@ export default function Login(props) {
               </Box>
             </Flex>
             <Flex flexBasis="0" flexGrow="1">
-              <Form style={{width:"100%", paddingRight:"10px"}}>
+              <Form style={{ width: "100%", paddingRight: "10px" }}>
                 <ModalHeader>Login</ModalHeader>
                 <ModalCloseButton></ModalCloseButton>
                 <ModalBody pb={6}>
