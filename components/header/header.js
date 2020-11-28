@@ -5,7 +5,6 @@ import LoginToggle from "../loginToggle/loginToggle";
 export default function Header() {
   return (
     <Box
-      as="header"
       position="fixed"
       w="100%"
       color="white"
@@ -16,14 +15,14 @@ export default function Header() {
       <Flex alignItems="center" justifyContent="space-between" h="100%">
         <Link href="/">
           <Box as="a" h="100%">
-            <Flex
-              backgroundPosition="center"
-              backgroundRepeat="no-repeat"
-              backgroundSize="cover"
-              w="200px"
-              h="100%"
-              backgroundImage={`url("/assets/logo5.png")`}
-            ></Flex>
+            <Text
+              fontFamily="Kaushan Script"
+              color="pink.500"
+              fontSize="50px"
+              textShadow="1px 2px #00000073"
+            >
+              Trip Planner
+            </Text>
           </Box>
         </Link>
         <Flex alignItems="center" justifyContent="space-between" w="350px">

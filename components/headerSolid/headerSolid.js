@@ -9,17 +9,18 @@ import {
   MenuItem,
   MenuGroup,
   MenuList,
+  Box,
+  Text
 } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
-import styles from "./headerSolid.module.css";
 
 export default function HeaderSolid() {
   return (
-    <header className={styles.header}>
-      <Flex alignItems="center" className={styles.navbar}>
+    <Box pos="fixed" h="70px" w="100%" bg="gray.50" textAlign="center" padding="0px 30px" top="0" boxShadow="md">
+      <Flex alignItems="center" h="100%">
         <Link href="/">
           <a style={{ height: "100%" }}>
-            <Flex className={styles.appLogo}></Flex>
+            <Text fontFamily="Kaushan Script" color="pink.500" fontSize="50px" textShadow="1px 2px #00000073">Trip Planner</Text>
           </a>
         </Link>
         <Spacer></Spacer>
@@ -42,6 +43,6 @@ export default function HeaderSolid() {
           </Menu>
         </Flex>
       </Flex>
-    </header>
+    </Box>
   );
 }
