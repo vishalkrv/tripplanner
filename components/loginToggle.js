@@ -6,8 +6,8 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/hooks";
-import Login from "../login/login";
-import SignUp from "../signUp/signUp";
+import Login from "./login";
+import SignUp from "./signUp";
 
 export default function LoginToggle(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();

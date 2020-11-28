@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useCountUp } from "react-countup";
-import { Text } from "@chakra-ui/react";
-import styles from "./progressRing.module.css";
+import { Text, Box } from "@chakra-ui/react";
 
 export default function ProgressRing({ trigger, count, content }) {
   const { countUp, start } = useCountUp({
@@ -15,9 +14,21 @@ export default function ProgressRing({ trigger, count, content }) {
     }
   }, [trigger]);
   return (
-    <div className={styles.cirlce}>
-      <div className={styles.counter}>{countUp}</div>
+    <Box
+      w="350px"
+      h="350px"
+      borderRadius="50%"
+      fontSize="50px"
+      color="black"
+      textAlign="center"
+      background="transparent"
+      borderColor="white"
+      borderWidth="10px"
+      pt="65px"
+      borderStyle="solid"
+    >
+      <Box fontSize="100px">{countUp}</Box>
       <Text fontSize="4xl">{content}</Text>
-    </div>
+    </Box>
   );
 }

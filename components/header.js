@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Flex, Text, Box } from "@chakra-ui/react";
-import LoginToggle from "../loginToggle/loginToggle";
+import LoginToggle from "./loginToggle";
+import { APP_TITLE } from "../lib/constants";
 
 export default function Header() {
   return (
@@ -21,7 +22,7 @@ export default function Header() {
               fontSize="50px"
               textShadow="1px 2px #00000073"
             >
-              Trip Planner
+              {APP_TITLE}
             </Text>
           </Box>
         </Link>

@@ -1,6 +1,7 @@
 import Head from "next/head";
-import Header from "./header/header";
-import HeaderSolid from "./headerSolid/headerSolid";
+import Header from "./header";
+import HeaderSolid from "./headerSolid";
+import Sidebar from "./sidebar";
 import { Box, Flex } from "@chakra-ui/react";
 
 export default function Layout({
@@ -19,11 +20,11 @@ export default function Layout({
         {isLogin ? (
           <>
             <HeaderSolid></HeaderSolid>
-            <Box display="inline-block" mt="70px">
-              <Box h="100vh" bg="gray.700" w="70px" pos="fixed"></Box>
+            <Box display="inline-block" mt="70px" w="100vw">
+              <Sidebar></Sidebar>
               <Flex
                 padding="10px 0px 20px 80px"
-                bg="white"
+                bg="gray.100"
                 overflow="auto"
                 h="94vh"
               >
@@ -35,10 +36,7 @@ export default function Layout({
           <>
             <Header></Header>
             <Box display="inline-block">
-              <Flex
-                padding="0px 0px 20px 0px"
-                background="transparent"
-              >
+              <Flex padding="0px 0px 20px 0px" background="transparent">
                 {children}
               </Flex>
             </Box>

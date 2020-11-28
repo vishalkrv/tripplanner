@@ -2,11 +2,11 @@ import { theme } from "@chakra-ui/react";
 
 const customTheme = {
   ...theme,
- styles: {
+  styles: {
     global: (props) => ({
-      body: {        
+      body: {
         fontFamily: "Oxygen, sans-serif",
-        overflow:"hidden"
+        overflow: "hidden",
       },
     }),
   }
