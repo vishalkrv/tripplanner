@@ -12,13 +12,12 @@ import {
   Box,
   Text,
   Avatar,
-  AvatarBadge,
-  Wrap,
-  WrapItem,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { APP_TITLE } from "../lib/constants";
 
 export default function HeaderSolid() {
+  const router = useRouter();
   return (
     <Box
       pos="fixed"
@@ -54,7 +53,7 @@ export default function HeaderSolid() {
             <MenuList>
               <MenuGroup title="Profile">
                 <MenuItem>My Account</MenuItem>
-                <MenuItem>Logout </MenuItem>
+                <MenuItem onClick={() => router.push("/")}>Logout </MenuItem>
               </MenuGroup>
               <MenuDivider />
               <MenuGroup title="Help">
