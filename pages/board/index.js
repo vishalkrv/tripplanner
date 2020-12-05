@@ -1,24 +1,22 @@
 import { Button, Flex } from "@chakra-ui/react";
-import Layout from "../components/layout";
+import Layout from "../../components/layout";
 import MaterialTable from "material-table";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { useRouter } from "next/router";
 
 export default function Board() {
-  const user = useStoreState((state) => state.user);
-  const userAction = useStoreActions((actions) => actions.user);
-
+  const router = useRouter();
   return (
     <Layout isLogin={true} title="Trips">
       <Flex direction="column" w="100%">
         <Flex justifyContent="flex-end" gridGap={10} pr={5}>
-          <Button variant="solid" colorScheme="pink">
-            Add {user.name}
-          </Button>
           <Button
-            variant="outline"
+            variant="solid"
             colorScheme="pink"
-            onClick={() => userAction.setName("Dunoya test")}
+            onClick={() => router.push("/board/add")}
           >
+            Add
+          </Button>
+          <Button variant="outline" colorScheme="pink">
             Edit
           </Button>
           <Button variant="outline" colorScheme="pink">
