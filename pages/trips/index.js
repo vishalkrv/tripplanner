@@ -3,12 +3,13 @@ import { FaRegCopy, FaEdit, FaArchive } from "react-icons/fa";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import Layout from "../../components/layout";
 import MaterialTable from "material-table";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function Trips() {
   const tripAction = useStoreActions((actions) => actions.trips);
   const tripState = useStoreState((state) => state.trips);
-
+  const router = useRouter();
   useEffect(() => {
     tripAction.getTripList();
   }, []);
@@ -16,7 +17,11 @@ export default function Trips() {
     <Layout isLogin={true} title="Trips">
       <Flex direction="column" w="100%">
         <Flex justifyContent="flex-end" gridGap={3} pr={5}>
-          <Button variant="solid" colorScheme="pink">
+          <Button
+            variant="solid"
+            colorScheme="pink"
+            onClick={() => router.push("/trips/create")}
+          >
             Create
           </Button>
           <Tooltip label="Clone">

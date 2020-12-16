@@ -9,10 +9,12 @@ import {
   SimpleGrid,
   Link,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import Emoji from "../components/emoji";
 import Layout from "../components/layout";
 
 export default function Dashboard() {
+  const router = useRouter();
   return (
     <Layout isLogin={true} title="Dashboard">
       <Flex
@@ -21,7 +23,12 @@ export default function Dashboard() {
         justifyContent="center"
         w="100%"
       >
-        <Button colorScheme="pink" variant="solid" size="lg">
+        <Button
+          colorScheme="pink"
+          variant="solid"
+          size="lg"
+          onClick={() => router.push("/trips/create")}
+        >
           Create a Trip
         </Button>
         <Flex w="100%" justifyContent="center" mt={20} gridGap={20}>
