@@ -68,7 +68,7 @@ export default function Login(props) {
       <Formik initialValues={data} onSubmit={onSave} validationSchema={schema}>
         {(actions) => (
           <Flex h="550px">
-            <Flex direction="column" bg="yellow.200" flexBasis="0" flexGrow="1">
+            <Flex direction="column" backgroundImage={`url(assets/login.svg)`} backgroundPosition="center" backgroundRepeat="no-repeat" flexBasis="0" flexGrow="1">
               <Spacer></Spacer>
               <Box p="4">
                 <Text>
