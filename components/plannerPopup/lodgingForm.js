@@ -1,80 +1,101 @@
 import {
   Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input
+  Input,
+  Select,
+  Box,
+  Stack,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
+import DatePicker from "../datePicker";
+import moment from "moment";
+import dynamic from "next/dynamic";
 
-/**
- *  Yup schema for validation of form fields
- */
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .email("Please enter valid email")
-    .required("This field is required"),
-  password: Yup.string().required("This field is required"),
-});
+const destinations = [
+  {
+    name: "Bali",
+  },
+  {
+    name: "Macau",
+  },
+  {
+    name: "Machu Picchu",
+  },
+  {
+    name: "New York",
+  },
+];
 
 export default function LodgingForm() {
-  //Set initial values top empty for email and password
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+  const [des, setDes] = useState();
 
-  /**
-   * On Login Page submit, trigger a API call
-   * @param {object} values email and password
-   */
-  const onSave = (values, actions) => {
-    setTimeout(() => {
-      console.log("hello");
-    }, 1000);
+  const Map = dynamic(
+    () => import("../map.js"), // replace '@components/map' with your component's location
+    { loading: () => "<p>A map is loading</p>", ssr: false } // This line is important. It's what prevents server-side render
+  );
+
+  const onDateChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+    console.log(start, end);
   };
-  return (
-    <Formik initialValues={data} onSubmit={onSave} validationSchema={schema}>
-      {(actions) => (
-        <Form>
-          <Field name="email">
-            {({ field, form }) => (
-              <FormControl isInvalid={form.errors.email && form.touched.email}>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input {...field} id="email" placeholder="Email" />
-                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-          <Field name="password">
-            {({ field, form }) => (
-              <FormControl
-                isInvalid={form.errors.password && form.touched.password}
-              >
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Input
-                  {...field}
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                />
-                <FormErrorMessage>{form.errors.password}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
 
-          <Button
-            colorScheme="pink"
-            mr={3}
-            type="submit"
-            isLoading={actions.isSubmitting}
-          >
-            Login
-          </Button>
-        </Form>
-      )}
-    </Formik>
+  const inputValue =
+    moment(`${startDate}`).format("MM/DD/YYYY") +
+    " - " +
+    moment(`${endDate}`).format("MM/DD/YYYY");
+
+  const destinationChange = (event) => {
+    const found = destinations.filter(
+      (item) => item.name === event.target.value
+    );
+    setDes(found[0]);
+  };
+
+  return (
+    <Box>
+      <Stack direction="row">
+        <Select
+          placeholder="Select a destination"
+          onChange={destinationChange}
+          value={des && des.name}
+        >
+          {destinations &&
+            destinations.map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+        </Select>
+        <DatePicker
+          selectedDate={null}
+          onChange={onDateChange}
+          startDate={startDate}
+          endDate={endDate}
+          selectsRange
+          openToDate={new Date()}
+          placeholderText="Select a date range"
+          value={!endDate ? new Date() : inputValue}
+        />
+        <NumberInput defaultValue={2} min={1} max={10}>
+          <NumberInputField />
+          <NumberInputStepper>
+            <NumberIncrementStepper />
+            <NumberDecrementStepper />
+          </NumberInputStepper>
+        </NumberInput>
+        <Button colorScheme="pink">Find</Button>
+      </Stack>
+      <Stack direction="row" mt="10px">
+        <Map></Map>
+      </Stack>
+    </Box>
   );
 }

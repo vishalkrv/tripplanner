@@ -6,6 +6,7 @@ import {
   List,
   ListItem,
   SimpleGrid,
+  IconButton,
 } from "@chakra-ui/react";
 
 import { useDisclosure } from "@chakra-ui/hooks";
@@ -18,7 +19,7 @@ import Sticker from "../../components/sticker";
 import PlannerPopup from "../../components/plannerPopup";
 
 export default function CreateTrip() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 
   const tripAction = useStoreActions((actions) => actions.trips);
   const tripState = useStoreState((state) => state.trips);
@@ -26,6 +27,10 @@ export default function CreateTrip() {
   useEffect(() => {
     tripAction.getTripPlan();
   }, []);
+
+  const addActivity = () => {
+    onToggle();
+  };
 
   const addOneDay = () => {
     tripAction.setTripPlan([
@@ -39,6 +44,13 @@ export default function CreateTrip() {
       },
     ]);
   };
+
+  const removeThisDay = (index) => {
+    let plans = tripState.tripPlan;
+    plans.splice(index, 1);
+    tripAction.setTripPlan([...plans]);
+  };
+
   return (
     <Layout isLogin={true} title="Plan a Trip">
       <SimpleGrid
@@ -61,6 +73,26 @@ export default function CreateTrip() {
               pos="relative"
             >
               <Sticker>{day.order}</Sticker>
+              <Box position="absolute" right="10px" top="5px">
+                <IconButton
+                  variant="ghost"
+                  size="xs"
+                  colorScheme="pink"
+                  aria-label="Add Activity"
+                  onClick={() => addActivity(index)}
+                  fontSize="15px"
+                  icon={<FaPlus />}
+                />
+                <IconButton
+                  variant="ghost"
+                  size="xs"
+                  colorScheme="pink"
+                  aria-label="Remove Trip"
+                  fontSize="15px"
+                  onClick={() => removeThisDay(index)}
+                  icon={<FaTrash />}
+                />
+              </Box>
               <List spacing={3}>
                 {day.items.map((plan, index) => (
                   <>
