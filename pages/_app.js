@@ -3,6 +3,7 @@ import { StoreProvider } from "easy-peasy";
 import store from "../state/store";
 import theme from "../styles/theme";
 import "../styles/global.css";
+import "../styles/date-picker.css";
 
 function MyApp({ Component, pageProps }) {
   return (
