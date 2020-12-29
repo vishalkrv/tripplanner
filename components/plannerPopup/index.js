@@ -31,7 +31,7 @@ export default function PlannerPopup(props) {
           <Tabs
             orientation="vertical"
             isLazy
-            variant="unstyled"
+            variant="soft-rounded"
             defaultIndex={0}
             onChange={(index) => setTabIndex(index)}
             size="lg"
@@ -53,7 +53,7 @@ export default function PlannerPopup(props) {
                   borderRightColor: "gray.300",
                 }}
               >
-                Transport
+                Event
               </Tab>
               <Tab
                 _focus={{
@@ -62,19 +62,19 @@ export default function PlannerPopup(props) {
                   borderRightColor: "gray.300",
                 }}
               >
-                Event
+                Transport
               </Tab>
             </TabList>
 
             <TabPanels minH="500px">
-              <TabPanel >
+              <TabPanel>
                 <LodgingForm></LodgingForm>
               </TabPanel>
               <TabPanel>
-                <TransportForm></TransportForm>
+                <EventForm></EventForm>
               </TabPanel>
               <TabPanel>
-                <EventForm></EventForm>
+                <TransportForm></TransportForm>
               </TabPanel>
             </TabPanels>
           </Tabs>

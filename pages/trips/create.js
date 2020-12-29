@@ -72,7 +72,7 @@ export default function CreateTrip() {
               overflowY="auto"
               pos="relative"
             >
-              <Sticker>{day.order}</Sticker>
+              <Sticker>{index + 1}</Sticker>
               <Box position="absolute" right="10px" top="5px">
                 <IconButton
                   variant="ghost"
