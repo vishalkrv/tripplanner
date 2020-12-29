@@ -1,9 +1,7 @@
-import userModel from "./user";
-import tripsModel from "./trips";
+import userModel from './user';
 
 const storeModel = {
-  user: userModel,
-  trips: tripsModel,
+  user: userModel
 };
 
 export default storeModel;

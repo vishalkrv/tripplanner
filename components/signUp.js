@@ -67,7 +67,7 @@ export default function SignUp(props) {
       <Formik initialValues={data} onSubmit={onSave} validationSchema={schema}>
         {(actions) => (
           <Flex>
-            <Flex direction="column" w="530px" backgroundRepeat="no-repeat" backgroundPosition="center" backgroundImage={`url(assets/register.svg)`}>
+            <Flex direction="column" w="530px" bg="yellow.200">
               <Spacer></Spacer>
               <Box p="4">
                 <Text>

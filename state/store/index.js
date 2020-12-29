@@ -1,11 +1,6 @@
-import { createStore } from "easy-peasy";
-import * as tripsService from "../../services/trips";
-import storeModel from "../model";
+import { createStore } from 'easy-peasy';
+import storeModel from '../model';
 
-const store = createStore(storeModel, {
-  injections: {
-    tripsService
-  },
-});
+const store = createStore(storeModel);
 
 export default store;
