@@ -16,7 +16,7 @@ import {
 import React from "react";
 import LodgingForm from "./lodgingForm";
 import EventForm from "./eventForm";
-import TransportForm from "./TransportForm";
+import TransportForm from "./transportForm";
 
 export default function PlannerPopup(props) {
   const [tabIndex, setTabIndex] = React.useState(0);
