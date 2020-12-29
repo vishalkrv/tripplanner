@@ -1,5 +1,4 @@
-import { Button, Flex, IconButton, Tooltip } from "@chakra-ui/react";
-import { FaEdit, FaArchive } from "react-icons/fa";
+import { Button, Flex } from "@chakra-ui/react";
 import Layout from "../../components/layout";
 import MaterialTable from "material-table";
 import { useRouter } from "next/router";
@@ -9,24 +8,20 @@ export default function Board() {
   return (
     <Layout isLogin={true} title="Trips">
       <Flex direction="column" w="100%">
-        <Flex justifyContent="flex-end" gridGap={3} pr={5}>
-          <Button variant="solid" colorScheme="pink">
+        <Flex justifyContent="flex-end" gridGap={10} pr={5}>
+          <Button
+            variant="solid"
+            colorScheme="pink"
+            onClick={() => router.push("/board/add")}
+          >
             Add
           </Button>
-          <Tooltip label="Edit">
-            <IconButton icon={<FaEdit />} variant="outline" colorScheme="pink">
-              Edit
-            </IconButton>
-          </Tooltip>
-          <Tooltip label="Archive">
-            <IconButton
-              icon={<FaArchive />}
-              variant="outline"
-              colorScheme="pink"
-            >
-              Archive
-            </IconButton>
-          </Tooltip>
+          <Button variant="outline" colorScheme="pink">
+            Edit
+          </Button>
+          <Button variant="outline" colorScheme="pink">
+            Archive
+          </Button>
         </Flex>
         <Flex direction="column" boxShadow="md" rounded="md" mt={5} pr={5}>
           <MaterialTable

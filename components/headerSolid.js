@@ -28,7 +28,6 @@ export default function HeaderSolid() {
       padding="0px 30px"
       top="0"
       boxShadow="md"
-      zIndex="1"
     >
       <Flex alignItems="center" h="100%">
         <Link href="/">
