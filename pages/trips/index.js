@@ -1,18 +1,38 @@
 import { Button, Flex, IconButton, Tooltip } from "@chakra-ui/react";
-import { FaEdit, FaArchive } from "react-icons/fa";
+import { FaRegCopy, FaEdit, FaArchive } from "react-icons/fa";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import Layout from "../../components/layout";
 import MaterialTable from "material-table";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default function Board() {
+export default function Trips() {
+  const tripAction = useStoreActions((actions) => actions.trips);
+  const tripState = useStoreState((state) => state.trips);
   const router = useRouter();
+  useEffect(() => {
+    tripAction.getTripList();
+  }, []);
   return (
     <Layout isLogin={true} title="Trips">
       <Flex direction="column" w="100%">
         <Flex justifyContent="flex-end" gridGap={3} pr={5}>
-          <Button variant="solid" colorScheme="pink">
-            Add
+          <Button
+            variant="solid"
+            colorScheme="pink"
+            onClick={() => router.push("/trips/create")}
+          >
+            Create
           </Button>
+          <Tooltip label="Clone">
+            <IconButton
+              icon={<FaRegCopy />}
+              variant="outline"
+              colorScheme="pink"
+            >
+              Clone
+            </IconButton>
+          </Tooltip>
           <Tooltip label="Edit">
             <IconButton icon={<FaEdit />} variant="outline" colorScheme="pink">
               Edit
@@ -30,38 +50,17 @@ export default function Board() {
         </Flex>
         <Flex direction="column" boxShadow="md" rounded="md" mt={5} pr={5}>
           <MaterialTable
-            options={{ pageSize: 7 }}
+            options={{ pageSize: 10 }}
             columns={[
               { title: "Title", field: "title" },
               { title: "Description", field: "description" },
               { title: "Destination", field: "destination" },
               { title: "Days", field: "days" },
               { title: "Travelers", field: "travelers", type: "numeric" },
-              { title: "Budget", field: "budget" },
-              { title: "Keyword", field: "keyword" },
+              { title: "Estimated Cost", field: "cost" },
+              { title: "Keywords", field: "keywords" },
             ]}
-            data={[
-              {
-                title: "African Safari",
-                description: "Looking for a guided safari to hunt antelope",
-                destination: "South Africa",
-                days: "7 Nights",
-                travelers: 2,
-                budget: "$12,000",
-                keyword: "African Safari",
-              },
-              {
-                title: "Grand Canyon Hiking",
-                description:
-                  "Desire a unique hiking trip of grand canyon to experience out of the way locations",
-                destination: "Utah",
-                days: "4 Nights",
-                travelers: 3,
-                cost: "$1,000",
-                keyword: "Grand Canyon Hiking",
-              },
-            ]}
-            title="Trip Board"
+            data={tripState.tripList}
           />
         </Flex>
       </Flex>
