@@ -19,6 +19,7 @@ export default function Layout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5PGb7_SW_pBdr9h-BanSAk9-W-KM1qn8&libraries=places"></script>
       </Head>
       <Box as="main">
         {isLogin ? (

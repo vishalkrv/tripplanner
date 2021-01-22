@@ -22,7 +22,7 @@ export default function PlannerPopup(props) {
   const [tabIndex, setTabIndex] = React.useState(0);
 
   return (
-    <Modal size={"6xl"} isOpen={props.open} onClose={props.close} isCentered>
+    <Modal size={"full"} closeOnEsc={false} isOpen={props.open} onClose={props.close} isCentered>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Plan Up !</ModalHeader>
