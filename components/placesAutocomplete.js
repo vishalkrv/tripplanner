@@ -87,6 +87,7 @@ export default function PlacesAutocomplete({ onSelect }) {
           borderBottomLeftRadius={5}
           borderBottomRightRadius={5}
           borderColor="gray.200"
+          backgroundColor="white"
         >
           {renderSuggestions()}
         </List>

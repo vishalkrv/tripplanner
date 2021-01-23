@@ -9,7 +9,8 @@ import {
   InputLeftElement,
   Flex,
   Text,
-  Icon
+  Icon,
+  AspectRatio,
 } from "@chakra-ui/react";
 import moment from "moment";
 import Calendar from "react-calendar";
@@ -91,7 +92,7 @@ const LodgingForm = () => {
 
   return (
     <Box>
-      <Stack direction="row" spacing="24px" pb={5}>
+      <Stack direction="row" spacing="24px" position="absolute" zIndex="5">
         <Box minW={450}>
           <PlacesAutocomplete onSelect={setSearchLocation}></PlacesAutocomplete>
         </Box>
@@ -132,53 +133,74 @@ const LodgingForm = () => {
           Find
         </Button>
       </Stack>
-      {lodgeOpts && lodgeOpts.location && (
-        <Flex mt={5} h="100%">
-          <Box>
-            {lodges &&
-              lodges.map((lodge) => (
-                <Box
-                  p={5}
-                  shadow="md"
-                  key={lodge.place_id}
-                  cursor="pointer"
-                  _hover={{
-                    background: "gray.100",
-                    color: "black",
-                  }}
-                >
-                  <Text fontSize="md" fontWeight="semibold" lineHeight="short">
-                    {lodge.name}
-                  </Text>
-                  <Flex mt={2} align="center">
+      <Flex pt={20} alignItems="start">
+        <Box overflowY="auto" height={500} maxW="45%" pl={1}>
+          {lodges &&
+            lodges.map((lodge) => (
+              <Box
+                p={5}
+                shadow="md"
+                key={lodge.place_id}
+                cursor="pointer"
+                _hover={{
+                  background: "gray.100",
+                  color: "black",
+                }}
+              >
+                <Text fontSize="md" fontWeight="semibold" lineHeight="short">
+                  {lodge.name}
+                </Text>
+                <Flex mt={2} align="center">
+                  <Box as={Flex} minW="50px" align="center">
                     <Box as={FaStar} color="orange.400" />
                     <Text ml={1} fontSize="sm">
                       <b>{lodge.rating}</b>
                     </Text>
-                    <Flex ml={2}>
-                      <Icon as={FaMapMarkerAlt}></Icon>
-                      <Text ml={1} fontSize="xs">
-                        {lodge.vicinity}
-                      </Text>
-                    </Flex>
+                  </Box>
+                  <Flex ml={2}>
+                    <Icon as={FaMapMarkerAlt}></Icon>
+                    <Text ml={1} fontSize="xs">
+                      {lodge.vicinity}
+                    </Text>
                   </Flex>
-                </Box>
-              ))}
-          </Box>
-          <Box h="500px" w="500px">
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: "AIzaSyA5PGb7_SW_pBdr9h-BanSAk9-W-KM1qn8",
-              }}
-              onGoogleApiLoaded={onGoogleMapLoad}
-              yesIWantToUseGoogleMapApiInternals={true}
-              center={lodgeOpts.location.coordinates}
-              defaultZoom={11}
-              onChange={onMapChange}
-            ></GoogleMapReact>
-          </Box>
-        </Flex>
-      )}
+                </Flex>
+              </Box>
+            ))}
+        </Box>
+        <Box h="500px" w={lodges && lodges.length > 1 && "65%" || "100%"}>
+          <GoogleMapReact
+            bootstrapURLKeys={{
+              key: "AIzaSyA5PGb7_SW_pBdr9h-BanSAk9-W-KM1qn8",
+            }}
+            onGoogleApiLoaded={onGoogleMapLoad}
+            yesIWantToUseGoogleMapApiInternals={true}
+            defaultCenter={{
+              lat: 17.38,
+              lng: 78.48,
+            }}
+            center={lodgeOpts.location && lodgeOpts.location.coordinates}
+            defaultZoom={12}
+            onChange={onMapChange}
+          >
+            {lodges && lodges.length > 1 && (
+              <>
+                <div
+                  lat={lodges[0].geometry.location.lat}
+                  lng={lodges[0].geometry.location.lng}
+                >
+                  Here
+                </div>
+                <div
+                  lat={lodges[1].geometry.location.lat}
+                  lng={lodges[2].geometry.location.lng}
+                >
+                  Here
+                </div>
+              </>
+            )}
+          </GoogleMapReact>
+        </Box>
+      </Flex>
     </Box>
   );
 };

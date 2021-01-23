@@ -11,7 +11,6 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 
-import { useDisclosure } from "@chakra-ui/hooks";
 import { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { FaPlus, FaTrash, FaTimes } from "react-icons/fa";
@@ -21,8 +20,7 @@ import Sticker from "../../components/sticker";
 import PlannerPopup from "../../components/plannerPopup";
 
 export default function CreateTrip() {
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
-
+  const [isOpen, setIsOpen] = useState(false);
   const tripAction = useStoreActions((actions) => actions.trips);
   const tripState = useStoreState((state) => state.trips);
 
@@ -30,8 +28,8 @@ export default function CreateTrip() {
     tripAction.getTripPlan();
   }, []);
 
-  const addActivity = () => {
-    onToggle();
+  const addActivity = (index) => {
+    setIsOpen(true);
   };
 
   const addOneDay = () => {
@@ -94,12 +92,8 @@ export default function CreateTrip() {
               </Box>
               <List spacing={3}>
                 {day.items.map((plan, index) => (
-                  <>
-                    <ListItem
-                      key={`${plan.type + "_" + index}`}
-                      cursor="pointer"
-                      onClick={onOpen}
-                    >
+                  <Box key={`${plan.type + "_" + index}`}>
+                    <ListItem cursor="pointer" onClick={() => setIsOpen(true)}>
                       <Flex alignItems="center">
                         <Text>
                           <Emoji name={plan.type}></Emoji>
@@ -107,7 +101,7 @@ export default function CreateTrip() {
                         </Text>
                       </Flex>
                     </ListItem>
-                  </>
+                  </Box>
                 ))}
               </List>
             </Box>
@@ -132,22 +126,31 @@ export default function CreateTrip() {
           </Text>
         </Box>
       </Flex>
-      <PlannerPopup open={isOpen} close={onClose}></PlannerPopup>
-      {/* <Box
-        position="absolute"
-        w="94%"
-        h="100%"
-        backgroundColor="white"
-        borderRadius={2}
-        zIndex={100}
-        p={5}
-      >
-        <Flex alignItems="center">
-          <Heading fontSize="3xl">Plan up</Heading>
-          <Spacer></Spacer>
-          <IconButton aria-label="Close" size="md" colorScheme="white" variant="ghost" icon={<FaTimes />} />
-        </Flex>
-      </Box> */}
+      {isOpen && (
+        <Box
+          position="absolute"
+          w="94%"
+          h="100%"
+          backgroundColor="white"
+          borderRadius={2}
+          zIndex={1}
+          p={5}
+        >
+          <Flex alignItems="center">
+            <Heading fontSize="3xl">Plan up</Heading>
+            <Spacer></Spacer>
+            <IconButton
+              aria-label="Close"
+              size="md"
+              colorScheme="white"
+              variant="ghost"
+              onClick={() => setIsOpen(false)}
+              icon={<FaTimes />}
+            />
+          </Flex>
+          <PlannerPopup></PlannerPopup>
+        </Box>
+      )}
     </Layout>
   );
 }
