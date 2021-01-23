@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import moment from "moment";
 import Calendar from "react-calendar";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { FaCalendarAlt, FaStar, FaMapMarkerAlt } from "react-icons/fa";
 import useOnclickOutside from "react-cool-onclickoutside";
 import GoogleMapReact from "google-map-react";
@@ -26,7 +27,10 @@ const LodgingForm = () => {
   const [personCount, setPersonCount] = useState(2);
   const [lodgeOpts, setLodgeOpts] = useState({});
   const [googleApi, setGoogleApi] = useState();
+  const [selectLodge, setSelectLodge] = useState();
   const [lodges, setLodges] = useState([]);
+  const tripAction = useStoreActions((actions) => actions.trips);
+  const tripState = useStoreState((state) => state.trips);
   const [calendarOpts, setCalendarOpts] = useState({
     date: new Date(),
     formattedDate: "",
@@ -90,6 +94,39 @@ const LodgingForm = () => {
     });
   };
 
+  const saveLodging = () => {
+    const index = tripState.selectedTripIndex;
+    const plans = tripState.tripPlan;
+
+    const start = moment(lodgeOpts.date[0]);
+    const end = moment(lodgeOpts.date[1]);
+    const diff = end.diff(start, "days");
+
+    const lengthFromCurrent = plans.length - index + 1;
+    // console.log(lengthFromCurrent)
+
+    // if(lengthFromCurrent  === 0){
+    //   for(let i = )
+    // }
+    // for(let i = index; i <= plans.length; i++){
+    //   plans[i].items.push({
+    //     title:`Stay at ${selectLodge.name}`,type:'lodging'
+    //   })
+    // }
+    // tripAction.setTripPlan()
+    console.log(tripState.tripPlan, index);
+    // [
+    //   ...tripState.tripPlan,
+    //   {
+    //     id: tripState.tripPlan.length,
+    //     title: "Day 1",
+    //     type: "day",
+    //     order: tripState.tripPlan.length + 1,
+    //     items: [],
+    //   },
+    // ]
+  };
+
   return (
     <Box>
       <Stack direction="row" spacing="24px" position="absolute" zIndex="5">
@@ -132,9 +169,14 @@ const LodgingForm = () => {
         <Button colorScheme="pink" onClick={findLodge}>
           Find
         </Button>
+        {selectLodge && (
+          <Button colorScheme="pink" onClick={saveLodging}>
+            Next
+          </Button>
+        )}
       </Stack>
       <Flex pt={20} alignItems="start">
-        <Box overflowY="auto" height={500} maxW="45%" pl={1}>
+        <Box overflowY="auto" height={500} maxW="45%" pl={1} pb={1}>
           {lodges &&
             lodges.map((lodge) => (
               <Box
@@ -146,6 +188,7 @@ const LodgingForm = () => {
                   background: "gray.100",
                   color: "black",
                 }}
+                onClick={() => setSelectLodge(lodge)}
               >
                 <Text fontSize="md" fontWeight="semibold" lineHeight="short">
                   {lodge.name}
@@ -167,7 +210,7 @@ const LodgingForm = () => {
               </Box>
             ))}
         </Box>
-        <Box h="500px" w={lodges && lodges.length > 1 && "65%" || "100%"}>
+        <Box h="500px" w={(lodges && lodges.length > 1 && "65%") || "100%"}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: "AIzaSyA5PGb7_SW_pBdr9h-BanSAk9-W-KM1qn8",
@@ -182,22 +225,6 @@ const LodgingForm = () => {
             defaultZoom={12}
             onChange={onMapChange}
           >
-            {lodges && lodges.length > 1 && (
-              <>
-                <div
-                  lat={lodges[0].geometry.location.lat}
-                  lng={lodges[0].geometry.location.lng}
-                >
-                  Here
-                </div>
-                <div
-                  lat={lodges[1].geometry.location.lat}
-                  lng={lodges[2].geometry.location.lng}
-                >
-                  Here
-                </div>
-              </>
-            )}
           </GoogleMapReact>
         </Box>
       </Flex>

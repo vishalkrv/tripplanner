@@ -7,10 +7,6 @@ export const sample = {
       order: 1,
       items: [
         {
-          title: "2 nights accomodation at Taj but it was boring to see",
-          type: "lodging",
-        },
-        {
           title: "Board flight to Paris",
           type: "transport",
         },

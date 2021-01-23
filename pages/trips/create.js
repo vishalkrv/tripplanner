@@ -30,6 +30,7 @@ export default function CreateTrip() {
 
   const addActivity = (index) => {
     setIsOpen(true);
+    tripAction.setSelectedTripIndex(index);
   };
 
   const addOneDay = () => {
@@ -37,7 +38,7 @@ export default function CreateTrip() {
       ...tripState.tripPlan,
       {
         id: tripState.tripPlan.length,
-        title: "Day 1",
+        title: "Day ",
         type: "day",
         order: tripState.tripPlan.length + 1,
         items: [],
