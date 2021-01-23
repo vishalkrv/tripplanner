@@ -3,6 +3,10 @@ import { action, thunk } from "easy-peasy";
 const tripsModel = {
   tripList: [],
   tripPlan: [],
+  selectedTripIndex: null,
+  setSelectedTripIndex: action((state, payload) => {
+    state.selectedTripIndex = payload;
+  }),
   setTripList: action((state, payload) => {
     state.tripList = payload;
   }),
