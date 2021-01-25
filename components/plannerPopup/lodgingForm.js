@@ -15,12 +15,165 @@ import {
 import moment from "moment";
 import Calendar from "react-calendar";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { FaCalendarAlt, FaStar, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaStar,
+  FaMapMarkerAlt,
+  FaMapPin,
+} from "react-icons/fa";
 import useOnclickOutside from "react-cool-onclickoutside";
 import GoogleMapReact from "google-map-react";
 import "react-calendar/dist/Calendar.css";
 
 import PlacesAutocomplete from "../placesAutocomplete";
+
+const mapStyles = [
+  {
+    elementType: "geometry",
+    stylers: [
+      {
+        hue: "#ff4400",
+      },
+      {
+        saturation: -68,
+      },
+      {
+        lightness: -4,
+      },
+      {
+        gamma: 0.72,
+      },
+    ],
+  },
+  {
+    featureType: "road",
+    elementType: "labels.icon",
+  },
+  {
+    featureType: "landscape.man_made",
+    elementType: "geometry",
+    stylers: [
+      {
+        hue: "#0077ff",
+      },
+      {
+        gamma: 3.1,
+      },
+    ],
+  },
+  {
+    featureType: "water",
+    stylers: [
+      {
+        hue: "#00ccff",
+      },
+      {
+        gamma: 0.44,
+      },
+      {
+        saturation: -33,
+      },
+    ],
+  },
+  {
+    featureType: "poi.park",
+    stylers: [
+      { visibility: "off" },
+      {
+        hue: "#44ff00",
+      },
+      {
+        saturation: -23,
+      },
+    ],
+  },
+  {
+    featureType: "water",
+    elementType: "labels.text.fill",
+    stylers: [
+      {
+        hue: "#007fff",
+      },
+      {
+        gamma: 0.77,
+      },
+      {
+        saturation: 65,
+      },
+      {
+        lightness: 99,
+      },
+    ],
+  },
+  {
+    featureType: "water",
+    elementType: "labels.text.stroke",
+    stylers: [
+      {
+        gamma: 0.11,
+      },
+      {
+        weight: 5.6,
+      },
+      {
+        saturation: 99,
+      },
+      {
+        hue: "#0091ff",
+      },
+      {
+        lightness: -86,
+      },
+    ],
+  },
+  {
+    featureType: "transit.line",
+    elementType: "geometry",
+    stylers: [
+      {
+        lightness: -48,
+      },
+      {
+        hue: "#ff5e00",
+      },
+      {
+        gamma: 1.2,
+      },
+      {
+        saturation: -23,
+      },
+    ],
+  },
+  {
+    featureType: "administrative",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
+  {
+    featureType: "transit",
+    elementType: "labels.text.stroke",
+    stylers: [
+      {
+        saturation: -64,
+      },
+      {
+        hue: "#ff9100",
+      },
+      {
+        lightness: 16,
+      },
+      {
+        gamma: 0.47,
+      },
+      {
+        weight: 2.7,
+      },
+    ],
+  },
+];
 
 const LodgingForm = () => {
   const [searchLocation, setSearchLocation] = useState();
@@ -102,7 +255,13 @@ const LodgingForm = () => {
     const end = moment(lodgeOpts.date[1]);
     const diff = end.diff(start, "days");
 
-    const lengthFromCurrent = plans.length - index + 1;
+    const lengthFromCurrent = plans.length - (index + 1);
+    // if (lengthFromCurrent >= diff){
+    //   // for(let i = lengthFromCurrent; i<diff; i++){
+
+    //   // }
+
+    // }
     // console.log(lengthFromCurrent)
 
     // if(lengthFromCurrent  === 0){
@@ -211,6 +370,7 @@ const LodgingForm = () => {
             ))}
         </Box>
         <Box h="500px" w={(lodges && lodges.length > 1 && "65%") || "100%"}>
+          {/* <Box h="500px" w="65%"> */}
           <GoogleMapReact
             bootstrapURLKeys={{
               key: "AIzaSyA5PGb7_SW_pBdr9h-BanSAk9-W-KM1qn8",
@@ -218,13 +378,28 @@ const LodgingForm = () => {
             onGoogleApiLoaded={onGoogleMapLoad}
             yesIWantToUseGoogleMapApiInternals={true}
             defaultCenter={{
-              lat: 17.38,
-              lng: 78.48,
+              lat: 6.92,
+              lng: 79.84,
             }}
+            options={{
+              styles: mapStyles,
+            }}
+            resetBoundsOnResize={true}
             center={lodgeOpts.location && lodgeOpts.location.coordinates}
-            defaultZoom={12}
+            defaultZoom={14}
             onChange={onMapChange}
           >
+            {lodges &&
+              lodges.length > 1 &&
+              lodges.map((location) => (
+                <Box
+                  key={location.place_id}
+                  lat={location.geometry.location.lat()}
+                  lng={location.geometry.location.lng()}
+                >
+                  <Icon as={FaMapPin} w={4} h={4} color="red.400"></Icon>
+                </Box>
+              ))}
           </GoogleMapReact>
         </Box>
       </Flex>
