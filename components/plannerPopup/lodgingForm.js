@@ -76,9 +76,18 @@ const mapStyles = [
     ],
   },
   {
+    featureType: "poi",
+    elementType: "all",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
+  {
     featureType: "poi.park",
     stylers: [
-      { visibility: "off" },
+      { visibility: "on" },
       {
         hue: "#44ff00",
       },
@@ -130,6 +139,7 @@ const mapStyles = [
     featureType: "transit.line",
     elementType: "geometry",
     stylers: [
+      { visibility: "on" },
       {
         lightness: -48,
       },
@@ -156,6 +166,7 @@ const mapStyles = [
     featureType: "transit",
     elementType: "labels.text.stroke",
     stylers: [
+      { visibility: "on" },
       {
         saturation: -64,
       },
@@ -184,6 +195,7 @@ const LodgingForm = () => {
   const [lodges, setLodges] = useState([]);
   const tripAction = useStoreActions((actions) => actions.trips);
   const tripState = useStoreState((state) => state.trips);
+  const [highlightIndex, setHighlight] = useState(-1);
   const [calendarOpts, setCalendarOpts] = useState({
     date: new Date(),
     formattedDate: "",
@@ -335,18 +347,30 @@ const LodgingForm = () => {
         )}
       </Stack>
       <Flex pt={20} alignItems="start">
-        <Box overflowY="auto" height={500} maxW="45%" pl={1} pb={1}>
+        <Box overflowY="auto" height={500} maxW="35%" pl={1} pb={1}>
           {lodges &&
-            lodges.map((lodge) => (
+            lodges.map((lodge, index) => (
               <Box
                 p={5}
                 shadow="md"
                 key={lodge.place_id}
                 cursor="pointer"
-                _hover={{
-                  background: "gray.100",
-                  color: "black",
-                }}
+                background={
+                  highlightIndex === index
+                    ? "gray.100"
+                    : selectLodge.place_id === lodge.place_id
+                    ? "gray.300"
+                    : ""
+                }
+                color={
+                  highlightIndex === index
+                    ? "black"
+                    : selectLodge.place_id === lodge.place_id
+                    ? "black"
+                    : ""
+                }
+                onMouseOver={(event) => setHighlight(index)}
+                onMouseLeave={(event) => setHighlight(-1)}
                 onClick={() => setSelectLodge(lodge)}
               >
                 <Text fontSize="md" fontWeight="semibold" lineHeight="short">
@@ -383,6 +407,7 @@ const LodgingForm = () => {
             }}
             options={{
               styles: mapStyles,
+              scrollwheel: true,
             }}
             resetBoundsOnResize={true}
             center={lodgeOpts.location && lodgeOpts.location.coordinates}
@@ -391,13 +416,22 @@ const LodgingForm = () => {
           >
             {lodges &&
               lodges.length > 1 &&
-              lodges.map((location) => (
+              lodges.map((location, index) => (
                 <Box
                   key={location.place_id}
                   lat={location.geometry.location.lat()}
                   lng={location.geometry.location.lng()}
+                  onMouseOver={(event) => setHighlight(index)}
+                  onMouseLeave={(event) => setHighlight(-1)}
+                  cursor="pointer"
                 >
-                  <Icon as={FaMapPin} w={4} h={4} color="red.400"></Icon>
+                  <Icon
+                    as={FaMapPin}
+                    transform={highlightIndex === index ? "scale(1.5)" : ""}
+                    w={4}
+                    h={4}
+                    color="red.400"
+                  ></Icon>
                 </Box>
               ))}
           </GoogleMapReact>
